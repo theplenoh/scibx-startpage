@@ -11,6 +11,9 @@
 
 <body class="p-15">
 <div class="container">
+    <nav class="clearfix">
+        <button class="btn btn-action float-right" type="button" onclick="halfmoon.toggleDarkMode();">Light/Dark Mode</button>
+    </nav>
     <main>
         <h1 class="mb-0">Start Page</h1>
         <p>
@@ -20,6 +23,7 @@
 </div>
 <script src="scripts/halfmoon.min.js"></script>
 <script>
+halfmoon.toggleDarkMode();
 $('#searchbar').focus();
 var SE = {
     g: "https://www.google.com/search?q=", 

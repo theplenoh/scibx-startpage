@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <title>Start Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+
+<link rel="stylesheet" href="styles/bootstrap.min.css">
+<script src="scripts/jquery.min.js"></script>
+<script src="scripts/bootstrap.min.js"></script>
+
+<style>
+#searchbar { width: 100%; }
+</style>
+</head>
+
+<body>
+<div class="container">
+<div class="row">
+    <div class="col-sm-12">
+        <h1>Start Page</h1>
+        <div class="form-group">
+            <input type="text" class="form-control" id="searchbar">
+        </div>
+    </div>
+</div>
+</div>
+<script>
+$('#searchbar').focus();
+var SE = {
+    g: "https://www.google.com/search?q=", 
+    yt: "https://www.youtube.com/results?search_query=", 
+    na: "https://search.naver.com/search.naver?query=", 
+    daum: "https://search.daum.net/search?q=", 
+    bk: "https://book.naver.com/search/search.nhn?query=", 
+    dict: "https://dict.naver.com/search.nhn?dicQuery=", 
+    mar: "http://mar.gar.in/search/&searchOption=yf&searchText=", 
+    en: "https://www.merriam-webster.com/dictionary/", 
+    oald: "https://www.oxfordlearnersdictionaries.com/definition/english/", 
+    urban: "https://www.urbandictionary.com/define.php?term=", 
+    ko: "https://ko.dict.naver.com/#/search?query=", 
+    choco: "https://community.chocolatey.org/packages?q=", 
+    caniuse: "https://caniuse.com/?search=", 
+    ar: "https://archive.scibx.org/?s="
+};
+var defaultSE = SE['g'];
+
+function searchFor(engine, searchWord)
+{
+    location.href=engine+searchWord;
+}
+$('#searchbar').on('keypress',function(e) // on every keystroke
+{
+    var input = $('#searchbar').val(); // extract the input from `#searchbar`
+    if (e.which == 13 && /^\w+\s.+/.test(input) && Object.keys(SE).indexOf(input.trim().split(" ")[0].toLowerCase())!=-1)
+    {
+        // splitted
+        var splitted = input.trim().split(" ");
+
+        // SEKeyword
+        var SEKeyword = input.trim().split(" ")[0].toLowerCase(); // search engine keyword
+
+        // srchKeyword
+        var srchKeyword = ""; // initialization
+        for(var i=1; i<splitted.length; i++)
+            srchKeyword = srchKeyword.concat(splitted[i]+" ");
+        srchKeyword = encodeURIComponent(srchKeyword.trim());
+
+        searchFor(SE[SEKeyword], srchKeyword);
+    }
+    else if (e.which == 13 && /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/.test(input))
+    {
+        //console.log("Used URL"+input);
+        if(!(/^(http|https):/.test(input)))
+            location.href="http://"+input;
+        else
+            location.href=input;
+    }
+    else if (e.which == 13)
+    {
+        var srchKeyword = input.trim();
+        srchKeyword = encodeURIComponent(srchKeyword.trim());
+        searchFor(defaultSE, srchKeyword);
+    }
+    else
+    {
+        console.log("did not pass");
+    }
+});
+</script>
+</body>
+</html>

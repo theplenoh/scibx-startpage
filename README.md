@@ -1,4 +1,4 @@
-# start-page
+# Scibx Startpage
 My distraction-free start page with a powerful search bar
 
 ## License

@@ -9,7 +9,7 @@
 <script src="scripts/jquery.min.js"></script>
 </head>
 
-<body class="p-15">
+<body class="p-15" data-set-preferred-mode-onload="true">
 <div class="container">
     <nav class="clearfix">
         <button class="btn btn-action float-right" type="button" onclick="halfmoon.toggleDarkMode();">Light/Dark Mode</button>
@@ -23,7 +23,6 @@
 </div>
 <script src="scripts/halfmoon.min.js"></script>
 <script>
-halfmoon.toggleDarkMode();
 $('#searchbar').focus();
 var SE = {
     g: "https://www.google.com/search?q=", 
